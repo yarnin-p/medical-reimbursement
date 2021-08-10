@@ -10,7 +10,7 @@ services:
         image: benchmark-app
         build:
             context: .
-            dockerfile: ./development/dockerfiles/php.dockerfile
+            dockerfile: dockerfiles/php.dockerfile
         restart: always
         environment:
             TZ: Asia/Bangkok
