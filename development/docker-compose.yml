@@ -1,0 +1,39 @@
+version: "3.8"
+
+networks:
+    default:
+        name: benchmark-network
+
+services:
+    dev-benchmark-mariadb:
+        image: mariadb:10
+        container_name: dev-benchmark-mariadb
+        restart: always
+        hostname: dev-benchmark-mariadb
+        environment:
+            TZ: Asia/Bangkok
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: db
+            MYSQL_USER: benchmark
+            MYSQL_PASSWORD: secret
+        ports:
+            - 3309:3306
+        networks:
+            - default
+        volumes:
+            - ./volumes/data:/var/lib/mysql
+
+    benchmark-app:
+        container_name: benchmark-app
+        image: benchmark-app
+        build:
+            context: .
+            dockerfile: development/dockerfiles/php.dockerfile
+        restart: always
+        environment:
+            TZ: Asia/Bangkok
+        networks:
+            - default
+        volumes:
+            - ./src:/var/www/html/benchmark-app
