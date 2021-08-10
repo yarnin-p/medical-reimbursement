@@ -103,5 +103,6 @@ COPY ./development/nginx/benchmark-app.dev.conf /etc/nginx/conf.d/default.conf
 
 RUN chown -R www-data:www-data /var/www/html/benchmark-app
 
+
 # Nginx on :80
 # EXPOSE 80
