@@ -6,6 +6,8 @@ use App\Api\V1\Modules\Auth\Repositories\Implement\AuthRepository;
 use App\Api\V1\Modules\Auth\Repositories\Interfaces\IAuthRepository;
 use App\Api\V1\Modules\MariaDB\Repositories\Implement\MariaDBRepository;
 use App\Api\V1\Modules\MariaDB\Repositories\Interfaces\IMariaDBRepository;
+use App\Api\V1\Modules\MedicalReimbursement\Repositories\Implement\MedicalReimbursementRepository;
+use App\Api\V1\Modules\MedicalReimbursement\Repositories\Interfaces\IMedicalReimbursementRepository;
 use App\Api\V1\Modules\Rental\Repositories\Implement\RentalRepository;
 use App\Api\V1\Modules\Rental\Repositories\Interfaces\IRentalRepository;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +26,9 @@ class RepositoryServiceProvider extends ServiceProvider
 
         // Authentication Repository
         $this->app->bind(IAuthRepository::class, AuthRepository::class);
+
+        // Medical Reimbursement Repository
+        $this->app->bind(IMedicalReimbursementRepository::class, MedicalReimbursementRepository::class);
 
         // Rental Repository
         $this->app->bind(IRentalRepository::class, RentalRepository::class);

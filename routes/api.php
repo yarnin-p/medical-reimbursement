@@ -34,3 +34,14 @@ Route::group([
     Route::put('{id}', 'Rental\Controllers\Implement\RentalController@update');
     Route::delete('{id}', 'Rental\Controllers\Implement\RentalController@delete');
 });
+
+
+Route::group([
+    'middleware' => [],
+    'prefix' => 'v1/medical-reimbursement'
+], function () {
+    Route::get('', 'MedicalReimbursement\Controllers\Implement\MedicalReimbursementController@list');
+    Route::get('{id}', 'MedicalReimbursement\Controllers\Implement\MedicalReimbursementController@read');
+    Route::post('', 'MedicalReimbursement\Controllers\Implement\MedicalReimbursementController@create');
+    Route::put('{id}', 'MedicalReimbursement\Controllers\Implement\MedicalReimbursementController@update');
+});

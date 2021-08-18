@@ -39,7 +39,6 @@ class AuthService extends MariaDBRepository implements IAuthService
         try {
             return $this->authRepo->checkLogin($email, $password);
         } catch (ModelNotFoundException $e) {
-//            abort(422, 'Invalid email: administrator not found');
             Log::error('AuthService@checkUserLogin@checkLogin: [' . $e->getCode() . '] ' . $e->getMessage());
             return $e->getMessage();
         }

@@ -112,13 +112,8 @@
 
         function validateLoginForm() {
             if (!$('#email').val() || !$('#password').val()) {
-                doAlertPopup('Login', 'Please fill in your email and password!', 'warning', {
-                    showCancelBtn: false,
-                    showConfirmBtn: true,
-                    confirmBtnText: 'Ok',
-                    cancelBtnText: 'Cancel',
-                    allowOutsideClick: true
-                })
+                let alert = new Alert(false, true, '', '', 'Cancel', 'Ok', true);
+                alert.doAlertPopup('Login', 'Please fill in your email and password!', 'warning')
                 return false
             }
             return true
@@ -133,7 +128,7 @@
                 }
                 let response = await postData('{{ url('api/v1/auth/check-login') }}', data, 'POST')
                 if (response.code === 200) {
-                    location.href = 'home'
+                    location.href = '{{ url('medical-reimbursement') }}'
                 } else if (response.code === 204) {
                     let alert = new Alert(false, true, '', '', 'Cancel', 'Ok', true);
                     alert.doAlertPopup('Login', 'No user found!', 'warning')

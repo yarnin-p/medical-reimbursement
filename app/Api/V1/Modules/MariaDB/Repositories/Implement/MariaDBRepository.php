@@ -16,9 +16,9 @@ class MariaDBRepository implements IMariaDBRepository
     }
 
 
-    public function create()
+    public function create($data)
     {
-        return $this->model::create();
+        return $data->save();
     }
 
     public function read($id, $filters = [])

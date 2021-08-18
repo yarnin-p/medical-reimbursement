@@ -182,7 +182,8 @@
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-12 col-md-3 text-right">
-                                                                <button class="btn btn-primary btn-sm h-100 mt-sm-1 mt-md-0 w-100">
+                                                                <button
+                                                                    class="btn btn-primary btn-sm h-100 mt-sm-1 mt-md-0 w-100">
                                                                     เพิ่มอาการ
                                                                 </button>
                                                             </div>
@@ -207,7 +208,8 @@
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-12 col-md-3 text-right">
-                                                                <button class="btn btn-primary btn-sm h-100 mt-sm-1 mt-md-0 w-100">
+                                                                <button
+                                                                    class="btn btn-primary btn-sm h-100 mt-sm-1 mt-md-0 w-100">
                                                                     เพิ่มสถานพยาบาล
                                                                 </button>
                                                             </div>
@@ -329,8 +331,16 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-12">
+                                                        <button type="button"
+                                                                onclick="submitMedReimbursement(); return false;"
+                                                                class="btn btn-primary glow position-relative">
+                                                            บันทึก
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -346,5 +356,31 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+        });
+
+        async function submitMedReimbursement() {
+            let data = {
+                user_id: "2",
+            }
+            let response = await postData('{{ url('api/v1/medical-reimbursement') }}', data, 'POST')
+            if (response.code === 200) {
+                {{--location.href = '{{ url('medical-reimbursement') }}'--}}
+            } else if (response.code === 204) {
+                let alert = new Alert(false, true, '', '', 'Cancel', 'Ok', true);
+                alert.doAlertPopup('Login', 'No user found!', 'warning')
+            } else {
+                let alert = new Alert(false, true, '', '', 'Cancel', 'Ok', true);
+                alert.doAlertPopup('Login', 'Something went wrong!', 'warning')
+            }
+        }
+    </script>
+
 
 @endsection

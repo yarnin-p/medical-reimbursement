@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Api\V1\Modules\Auth\Controllers\Interfaces\IAuthController;
+use App\Api\V1\Modules\MedicalReimbursement\Controllers\Implement\MedicalReimbursementController;
+use App\Api\V1\Modules\MedicalReimbursement\Controllers\Interfaces\IMedicalReimbursementController;
 use App\Api\V1\Modules\Rental\Controllers\Implement\RentalController;
 use App\Api\V1\Modules\Rental\Controllers\Interfaces\IRentalController;
 use App\Http\Controllers\Auth\Controllers\AuthController;
@@ -22,5 +24,8 @@ class ApiControllerServiceProvider extends ServiceProvider
 
         // API Authentication Controller
         $this->app->bind(IAuthController::class, AuthController::class);
+
+        // API Medical Reimbursement Controller
+        $this->app->bind(IMedicalReimbursementController::class, MedicalReimbursementController::class);
     }
 }

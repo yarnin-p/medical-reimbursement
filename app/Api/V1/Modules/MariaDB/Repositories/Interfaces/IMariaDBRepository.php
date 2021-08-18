@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 interface IMariaDBRepository
 {
-    public function create();
+    public function create($data);
 
     public function read($id, $filters = []);
 

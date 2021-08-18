@@ -3,10 +3,10 @@
 namespace App\Api\V1\Modules\Auth\Controllers\Implement;
 
 use App\Api\V1\Modules\Auth\Controllers\Interfaces\IAuthController;
+use App\Api\V1\Modules\Auth\Resources\LoginResource;
 use App\Api\V1\Modules\Auth\Services\Interfaces\IAuthService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginGetRequest;
-use App\Http\Resources\Auth\LoginGetResource;
+use App\Http\Requests\Auth\LoginRequest;
 use Exception;
 use TypeError;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -30,29 +30,28 @@ class AuthController extends Controller implements IAuthController
     }
 
 
-    public function login(LoginGetRequest $request)
+    public function login(LoginRequest $request)
     {
         try {
-            $input = $request->data();
+            $input = $request->makeInputData();
         } catch (TypeError $e) {
-            Log::error('AuthController@makeInputLoginRequest@checkLogin: [' . $e->getCode() . '] ' . $e->getMessage());
-            return responseError(500, $e->getMessage(), 'Something went wrong!');
+            Log::error('AuthController@makeInputLogin@checkLogin: [' . $e->getCode() . '] ' . $e->getMessage());
+            return responseError($e->getMessage());
         }
-
 
         try {
             $user = $this->authService->checkLogin($input->email, $input->password);
             if (is_string($user)) {
-                return responseError(500, $user, 'Something went wrong!');
+                return responseError($user);
             } else {
                 if ($user) {
-                    return responseSuccess(200, 'Ok', new LoginGetResource($user));
+                    return responseSuccess(new LoginResource($user));
                 }
-                return responseSuccess(204, 'Ok', (object)[]);
+                return responseNoContent();
             }
         } catch (Exception $e) {
             Log::error('AuthController@checkLoginUser@checkLogin: [' . $e->getCode() . '] ' . $e->getMessage());
-            return responseError(500, $e->getMessage(), '');
+            return responseError($e->getMessage());
         }
     }
 }

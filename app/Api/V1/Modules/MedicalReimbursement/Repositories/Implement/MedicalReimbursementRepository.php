@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Api\V1\Modules\Rental\Repositories\Implement;
+namespace App\Api\V1\Modules\MedicalReimbursement\Repositories\Implement;
 
 use App\Api\V1\Modules\MariaDB\Repositories\Implement\MariaDBRepository;
 use App\Api\V1\Modules\Rental\Repositories\Interfaces\IRentalRepository;
 use App\Models\Rental;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class RentalRepository extends MariaDBRepository
+class MedicalReimbursementRepository extends MariaDBRepository
 {
 
     /**
